@@ -1,0 +1,36 @@
+name: content
+type: Load Balanced Web Service
+
+http:
+  path: '/'
+  healthcheck: 
+    path: '/health'
+    port: 3000
+    healthy_threshold: 2
+    unhealthy_threshold: 2
+    timeout: 2s
+    interval: 5s
+    grace_period: 60s
+    deregistration_delay: 0s
+
+image:
+  build:
+    dockerfile: Dockerfile
+    context: './'
+  port: 3000
+
+deployment:
+  rolling: recreate  
+
+environments:
+  dev:
+    cpu: 512
+    memory: 1024
+    platform: linux/arm64
+    count: 1
+    exec: true
+    network:
+      connect: true
+    variables:
+      HOSTNAME: "0.0.0.0"
+      PORT: 3000

@@ -1,0 +1,24 @@
+{
+  "name": "test-xcl",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "image": "docker build --tag xcl-test .",
+    "aws:login": "awscreds-custom login --profile handstudio && export AWS_PROFILE=handstudio-cached",
+    "deploy:stage": "copilot svc deploy --name content --env dev"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.6",
+    "@types/react": "18.2.48",
+    "typescript": "5.3.3"
+  }
+}
